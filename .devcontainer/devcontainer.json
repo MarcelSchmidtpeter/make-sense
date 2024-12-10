@@ -1,0 +1,70 @@
+{
+    "name": "make-sense",
+    "dockerComposeFile": [
+      "docker-compose.yml"
+    ],
+    "service": "make-sense-devcontainer",
+    "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
+    "forwardPorts": [
+      3000
+    ],
+    "portsAttributes": {
+      "3000": {
+        "label": "Application",
+        "protocol": "http",
+        "onAutoForward": "notify"
+      }
+    },
+    "remoteUser": "node",
+    "postCreateCommand": {
+      "history": "echo \"export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.zsh_history\" >> /home/node/.zshrc"
+    },
+    "remoteEnv": {
+      "GIT_EDITOR": "code --wait"
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "EditorConfig.EditorConfig",
+          "esbenp.prettier-vscode",
+          "eamodio.gitlens",
+          "dbaeumer.vscode-eslint",
+          "GitHub.copilot",
+          "waderyan.gitblame",
+          "mutantdino.resourcemonitor"
+        ],
+        "settings": {
+          "editor.formatOnSave": true,
+          "explorer.fileNesting.enabled": true,
+          "explorer.fileNesting.expand": true,
+          "explorer.fileNesting.patterns": {
+            "*.ts": "${capture}.js",
+            "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+            "*.jsx": "${capture}.js",
+            "*.tsx": "${capture}.ts",
+            "tsconfig.json": "tsconfig.*.json, tsconfig.*.tsbuildinfo",
+            "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb",
+            ".yarnrc.yml": ".yarnrc.*.yml"
+          },
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "files.exclude": {
+            "**/.github": true
+            //"**/.devcontainer": true,
+          }
+        }
+      }
+    },
+    "features": {
+      "ghcr.io/devcontainers/features/common-utils:2": {
+        "installZsh": "true",
+        "configureZshAsDefaultShell": "true",
+        "username": "node",
+        "upgradePackages": "true"
+      },
+      "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "overrideFeatureInstallOrder": [
+      "ghcr.io/devcontainers/features/common-utils"
+    ]
+  }

@@ -1,0 +1,22 @@
+services:
+  make-sense-devcontainer:
+    image: make-sense-devcontainer:latest
+    container_name: make-sense-devcontainer
+    build:
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
+      args: {
+        devcontainercli: true
+      }
+    working_dir: /workspace
+    ports:
+      - "3000:3000"
+    volumes:
+      - make-sense-devcontainer-bashhistory:/commandhistory
+      - ..:/workspace:cached
+    environment:
+      - NODE_ENV=development
+    command: sleep infinity
+
+volumes:
+  make-sense-devcontainer-bashhistory:
